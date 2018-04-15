@@ -1,0 +1,84 @@
+server:
+    port: 8090
+spring:
+    profiles:
+        active: dev
+
+---
+
+spring:
+    profiles: dev
+    datasource:
+        master:
+            jdbcurl: jdbc:mysql://localhost:3306/vd_manage?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+            driver-class-name: com.mysql.jdbc.Driver
+        slave:
+            url: jdbc:mysql://localhost:3306/vd_manage?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+            driver-class-name: com.mysql.jdbc.Driver
+        read: get,select,count,list,query,find
+        write: add,create,update,delete,remove,insert
+
+mybatis:
+   type-aliases-package: com.hqs.springboot.entity
+   mapperLocations: classpath:mapper/*.xml  #指定*Mapper.xml的位置
+   configLocation: classpath:/mybatis-config.xml
+mapper:
+    mappers:  com.hqs.springboot.mapper
+    not-empty: false
+    identity: MYSQL
+
+# Druid AOP config
+aop:
+    proxy-target-class: true
+logging:
+    config: classpath:logback.xml
+    #path: d:/logs
+#    level:
+#        root:
+#            WARN
+
+
+
+---
+
+profiles: prod
+datasource:
+    datasource:
+            master:
+                jdbcurl: jdbc:mysql://localhost:3306/vd_manage?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+                username: root
+                password: root
+                driver-class-name: com.mysql.jdbc.Driver
+            slave:
+                url: jdbc:mysql://localhost:3306/vd_manage?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+                username: root
+                password: root
+                driver-class-name: com.mysql.jdbc.Driver
+            read: get,select,count,list,query,find
+            write: add,create,update,delete,remove,insert
+app:
+    name: springboot2.0.1.RELEASE-mybatis-rw
+
+mybatis:
+   type-aliases-package: com.hqs.springboot.entity
+   mapperLocations: classpath:mapper/*.xml  #指定*Mapper.xml的位置
+   configLocation: classpath:/mybatis-config.xml
+mapper:
+    mappers:  com.hqs.springboot.mapper
+    not-empty: false
+    identity: MYSQL
+
+# Druid AOP config
+aop:
+    proxy-target-class: true
+logging:
+    config: classpath:logback.xml
+    #path: d:/logs
+#    level:
+#        root:
+#            WARN
+
